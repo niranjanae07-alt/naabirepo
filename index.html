@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fff7fa" />
+  <meta name="description" content="Nabiya A — Computer Science Engineering student, learning to turn ideas into thoughtful digital experiences." />
+  <title>Nabiya A | CSE Student Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: #d989a9;
+      --pink-dark: #a84f76;
+      --pink-light: #f9e8ef;
+      --pink-pale: #fff7fa;
+      --ink: #352833;
+      --muted: #796b75;
+      --white: #ffffff;
+      --line: #f0dce5;
+      --shadow: 0 18px 50px rgba(120, 64, 91, .10);
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      color: var(--ink);
+      background: var(--pink-pale);
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .nav-wrap {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(255,247,250,.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(240,220,229,.8);
+    }
+    nav {
+      width: min(1120px, calc(100% - 40px)); margin: auto; min-height: 76px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .logo { font-family: "Playfair Display", serif; font-size: 1.55rem; font-weight: 700; letter-spacing: -.04em; }
+    .logo span { color: var(--pink-dark); }
+    .nav-links { display: flex; align-items: center; gap: 27px; color: var(--muted); font-size: .92rem; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--pink-dark); }
+    .nav-cta { padding: 10px 17px; border: 1px solid var(--line); border-radius: 999px; color: var(--pink-dark) !important; }
+    .menu-btn { display: none; border: 0; background: transparent; color: var(--ink); font-size: 1.6rem; cursor: pointer; }
+    .container { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    .hero { padding: 88px 0 74px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 64px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px; padding: 8px 13px;
+      background: var(--white); border: 1px solid var(--line); border-radius: 999px;
+      color: var(--pink-dark); font-size: .78rem; letter-spacing: .09em; text-transform: uppercase; font-weight: 700;
+    }
+    .dot { width: 7px; height: 7px; background: var(--pink); border-radius: 50%; box-shadow: 0 0 0 4px var(--pink-light); }
+    h1, h2, h3 { margin: 0; line-height: 1.15; }
+    h1 { font-family: "Playfair Display", serif; font-size: clamp(3.2rem, 7vw, 5.6rem); letter-spacing: -.055em; font-weight: 600; margin: 23px 0 18px; }
+    h1 em { color: var(--pink-dark); font-style: normal; }
+    .hero-copy { color: var(--muted); max-width: 570px; font-size: 1.08rem; margin: 0 0 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 13px 19px; border-radius: 999px; font-weight: 700; font-size: .93rem; border: 1px solid transparent; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { color: white; background: var(--pink-dark); box-shadow: 0 10px 24px rgba(168,79,118,.2); }
+    .btn-primary:hover { background: #913f63; box-shadow: 0 14px 30px rgba(168,79,118,.25); }
+    .btn-secondary { background: var(--white); border-color: var(--line); color: var(--ink); }
+    .hero-note { margin-top: 23px; color: #9a8993; font-size: .84rem; }
+    .art-area { min-height: 400px; display: grid; place-items: center; position: relative; }
+    .blob {
+      width: min(350px, 75vw); aspect-ratio: 1; border-radius: 46% 54% 63% 37% / 42% 39% 61% 58%;
+      background: linear-gradient(145deg, #f6d4e1, #e8a9c2 65%, #d989a9);
+      position: absolute; transform: rotate(-9deg); box-shadow: var(--shadow);
+      animation: float 7s ease-in-out infinite;
+    }
+    .orbit { position: absolute; width: 410px; max-width: 90vw; aspect-ratio: 1; border: 1px solid #edc6d7; border-radius: 50%; transform: rotate(28deg); }
+    .orbit::before { content: "✦"; position: absolute; top: 14%; right: 13%; color: var(--pink-dark); font-size: 1.8rem; }
+    .orbit::after { content: "✧"; position: absolute; bottom: 14%; left: 9%; color: var(--pink-dark); font-size: 2rem; }
+    .monogram {
+      position: relative; z-index: 1; width: 230px; height: 230px; border-radius: 50%;
+      background: rgba(255,255,255,.83); border: 1px solid rgba(255,255,255,.95);
+      display: grid; place-items: center; box-shadow: 0 20px 60px rgba(120,64,91,.13);
+      font-family: "Playfair Display", serif; font-size: 5.6rem; color: var(--pink-dark); letter-spacing: -.08em;
+    }
+    .float-card { position: absolute; z-index: 2; background: rgba(255,255,255,.94); border: 1px solid var(--line); border-radius: 16px; padding: 13px 16px; box-shadow: var(--shadow); font-size: .83rem; }
+    .float-card strong { display: block; font-size: .96rem; }
+    .float-card small { color: var(--muted); }
+    .card-top { top: 12%; left: 0; transform: rotate(-5deg); }
+    .card-bottom { bottom: 11%; right: 0; transform: rotate(4deg); }
+    section { padding: 80px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 35px; }
+    .kicker { color: var(--pink-dark); font-size: .78rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; margin-bottom: 10px; }
+    h2 { font-family: "Playfair Display", serif; font-size: clamp(2.2rem, 4vw, 3.2rem); letter-spacing: -.04em; }
+    .section-intro { color: var(--muted); max-width: 450px; margin: 12px 0 0; }
+    .about-section { background: white; }
+    .about-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: 50px; align-items: stretch; }
+    .about-card { padding: 30px; background: var(--pink-pale); border: 1px solid var(--line); border-radius: var(--radius); display: flex; flex-direction: column; justify-content: space-between; min-height: 290px; }
+    .quote-mark { color: var(--pink); font-family: "Playfair Display", serif; font-size: 4rem; line-height: .8; }
+    .about-card p { font-family: "Playfair Display", serif; font-size: 1.45rem; line-height: 1.45; margin: 22px 0; }
+    .about-text { color: var(--muted); }
+    .detail-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .detail-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--white); border: 1px solid var(--line); border-radius: 999px; padding: 9px 13px; font-size: .85rem; }
+    .detail-chip span { color: var(--pink-dark); }
+    .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 17px; }
+    .skill-card { background: white; border: 1px solid var(--line); border-radius: 20px; padding: 25px 22px; min-height: 190px; transition: transform .25s ease, box-shadow .25s ease; }
+    .skill-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .skill-icon { width: 47px; height: 47px; display: grid; place-items: center; border-radius: 15px; background: var(--pink-light); color: var(--pink-dark); font-weight: 700; font-size: 1.15rem; margin-bottom: 20px; }
+    .skill-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+    .skill-card p { color: var(--muted); font-size: .87rem; margin: 0; }
+    .projects-section { background: #fff0f5; }
+    .project-card { display: grid; grid-template-columns: .85fr 1.15fr; overflow: hidden; background: white; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .project-visual { min-height: 300px; background: linear-gradient(140deg, #f6d5e2, #fff7fa); display: grid; place-items: center; position: relative; overflow: hidden; }
+    .window { width: 72%; background: rgba(255,255,255,.9); border: 1px solid #e9c8d6; border-radius: 13px; padding: 13px; box-shadow: 0 15px 35px rgba(120,64,91,.12); transform: rotate(-5deg); }
+    .window-top { display: flex; gap: 5px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+    .window-top i { width: 6px; height: 6px; border-radius: 50%; background: #d989a9; }
+    .window-line { height: 8px; background: #f2d8e3; border-radius: 8px; margin-top: 10px; }
+    .window-line.short { width: 55%; }
+    .window-boxes { display: flex; gap: 8px; margin-top: 15px; }
+    .window-boxes span { height: 43px; flex: 1; background: #f9e8ef; border-radius: 7px; }
+    .project-content { padding: clamp(25px, 4vw, 43px); align-self: center; }
+    .tag { display: inline-block; color: var(--pink-dark); background: var(--pink-light); border-radius: 999px; padding: 6px 10px; font-size: .75rem; font-weight: 700; margin-bottom: 16px; }
+    .project-content h3 { font-family: "Playfair Display", serif; font-size: 1.9rem; margin-bottom: 13px; }
+    .project-content p { color: var(--muted); margin: 0 0 19px; }
+    .tech-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tech-list span { font-size: .78rem; color: var(--muted); border: 1px solid var(--line); border-radius: 8px; padding: 5px 9px; }
+    .contact-card { background: var(--ink); color: white; border-radius: 30px; padding: clamp(30px, 6vw, 65px); display: grid; grid-template-columns: 1.15fr .85fr; gap: 35px; align-items: center; overflow: hidden; position: relative; }
+    .contact-card::after { content: "✧"; position: absolute; right: 32%; top: -35px; color: rgba(255,255,255,.09); font-size: 13rem; pointer-events: none; }
+    .contact-card .kicker { color: #f0aeca; }
+    .contact-card h2 { max-width: 520px; }
+    .contact-card p { color: #d9cbd3; max-width: 490px; }
+    .contact-links { display: grid; gap: 12px; position: relative; z-index: 1; }
+    .contact-link { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); padding: 15px 17px; border-radius: 14px; transition: background .2s ease; overflow-wrap: anywhere; }
+    .contact-link:hover { background: rgba(255,255,255,.14); }
+    .contact-link .symbol { width: 35px; height: 35px; flex-shrink: 0; display: grid; place-items: center; background: rgba(240,174,202,.18); color: #f0aeca; border-radius: 10px; }
+    .contact-link small { display: block; color: #c7b6c1; font-size: .74rem; }
+    .contact-link strong { font-size: .89rem; font-weight: 600; }
+    footer { padding: 27px 0; color: var(--muted); font-size: .84rem; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+    .footer-inner span { color: var(--pink-dark); }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @keyframes float { 0%,100% { transform: rotate(-9deg) translateY(0); } 50% { transform: rotate(-5deg) translateY(-12px); } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
+    @media (max-width: 850px) {
+      .hero { padding-top: 58px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 20px; }
+      .art-area { min-height: 340px; }
+      .blob { width: 270px; }
+      .monogram { width: 185px; height: 185px; font-size: 4.5rem; }
+      .orbit { width: 330px; }
+      .card-top { left: 8%; top: 7%; }
+      .card-bottom { right: 7%; bottom: 6%; }
+      .about-grid { grid-template-columns: 1fr; gap: 20px; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-card { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      nav { width: min(100% - 30px, 1120px); min-height: 68px; }
+      .container { width: min(100% - 30px, 1120px); }
+      .menu-btn { display: block; }
+      .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 18px 22px 22px; background: var(--pink-pale); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 15px; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 7px 0; }
+      .nav-cta { text-align: center; }
+      .hero { padding: 48px 0 35px; }
+      h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
+      .hero-copy { font-size: 1rem; }
+      .art-area { min-height: 300px; margin-top: 4px; }
+      .blob { width: 230px; }
+      .monogram { width: 155px; height: 155px; font-size: 3.8rem; }
+      .orbit { width: 285px; }
+      .float-card { padding: 10px 12px; font-size: .75rem; }
+      .float-card strong { font-size: .84rem; }
+      .card-top { left: 0; top: 6%; }
+      .card-bottom { right: 0; bottom: 5%; }
+      section { padding: 60px 0; }
+      .section-head { display: block; }
+      .skills-grid { gap: 11px; }
+      .skill-card { padding: 18px 15px; min-height: 170px; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-visual { min-height: 230px; }
+      .project-content h3 { font-size: 1.65rem; }
+      .contact-card { border-radius: 23px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-wrap">
+    <nav aria-label="Main navigation">
+      <a class="logo" href="#home" aria-label="Nabiya home">nabiya<span>.</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Project</a>
+        <a class="nav-cta" href="#contact">Let's connect ↗</a>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow"><span class="dot"></span> Computer Science Engineering Student</div>
+          <h1>Hi, I'm<br><em>Nabiya A.</em></h1>
+          <p class="hero-copy">Curious mind, creative heart. I'm learning to turn ideas into thoughtful digital experiences, one line of code at a time.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Explore my work <span>↗</span></a>
+            <a class="btn btn-secondary" href="#contact">Get in touch</a>
+          </div>
+          <p class="hero-note">Currently learning · Creating · Growing</p>
+        </div>
+        <div class="art-area reveal" aria-label="Decorative Nabiya monogram illustration">
+          <div class="orbit"></div><div class="blob"></div>
+          <div class="monogram">NA</div>
+          <div class="float-card card-top"><strong>✿ A curious learner</strong><small>Always growing</small></div>
+          <div class="float-card card-bottom"><strong>Code with purpose</strong><small>Ideas into experiences ✨</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="kicker">A little about me</div><h2>Learning with purpose.</h2></div>
+          <p class="section-intro">Every new concept is a chance to build something meaningful.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-card reveal">
+            <div class="quote-mark">“</div>
+            <p>Small steps today. Beautiful things tomorrow.</p>
+            <div style="color:var(--pink-dark);font-weight:700">— Nabiya A.</div>
+          </div>
+          <div class="about-text reveal">
+            <p>I'm Nabiya, a Computer Science Engineering student at <strong>Jawaharlal College of Engineering and Technology</strong>, Kerala, India.</p>
+            <p>I'm building my foundation in programming and web development, exploring how technology can solve problems and make everyday experiences better. This portfolio is a small window into my learning journey and the skills I'm developing.</p>
+            <div class="detail-row">
+              <span class="detail-chip"><span>⌁</span> CSE Student</span>
+              <span class="detail-chip"><span>⌖</span> Kerala, India</span>
+              <span class="detail-chip"><span>♡</span> Lifelong learner</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="kicker">What I'm learning</div><h2>My skill set.</h2></div>
+          <p class="section-intro">The tools I'm using to grow as a developer, with plenty more to explore.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card reveal"><div class="skill-icon">C</div><h3>C Programming</h3><p>Building a strong foundation in logic, algorithms, and problem-solving.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon">Py</div><h3>Python</h3><p>Learning to write clear, useful code and explore programming concepts.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon">‹/›</div><h3>HTML</h3><p>Structuring accessible, meaningful content for the web.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon">#</div><h3>CSS</h3><p>Creating responsive layouts and bringing web pages to life with style.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects-section" id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="kicker">A work in progress</div><h2>My featured project.</h2></div>
+          <p class="section-intro">A place to share what I build, what I learn, and how my ideas take shape.</p>
+        </div>
+        <article class="project-card reveal">
+          <div class="project-visual" aria-hidden="true">
+            <div class="window"><div class="window-top"><i></i><i></i><i></i></div><div class="window-line short"></div><div class="window-line"></div><div class="window-line" style="width:78%"></div><div class="window-boxes"><span></span><span></span><span></span></div></div>
+          </div>
+          <div class="project-content">
+            <span class="tag">Personal website · 01</span>
+            <h3>My Portfolio Website</h3>
+            <p>A responsive personal portfolio designed to introduce me, highlight my current technical skills, and make it easy to connect with me. Built as a starting point that I can keep improving as I learn.</p>
+            <div class="tech-list"><span>HTML</span><span>CSS</span><span>Responsive design</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-card reveal">
+          <div>
+            <div class="kicker">Let's connect</div>
+            <h2>Have an idea? Let's make it happen.</h2>
+            <p>I'm always happy to connect with fellow students, learn from others, and explore new opportunities. Feel free to reach out!</p>
+            <a class="btn btn-primary" href="mailto:nabiyaabdulnazar@gmail.com">Send me an email ↗</a>
+          </div>
+          <div class="contact-links">
+            <a class="contact-link" href="mailto:nabiyaabdulnazar@gmail.com"><span class="symbol">✉</span><span><small>Email me</small><strong>nabiyaabdulnazar@gmail.com</strong></span></a>
+            <a class="contact-link" href="https://www.linkedin.com/in/nabiya-a-6baaa0385" target="_blank" rel="noopener noreferrer"><span class="symbol">in</span><span><small>Connect on LinkedIn</small><strong>Nabiya A.</strong></span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Nabiya A. Made with <span>♡</span> and curiosity.</div>
+      <a href="#home">Back to top ↑</a>
+    </div>
+  </footer>
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+      menuBtn.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+      menuBtn.textContent = isOpen ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.textContent = '☰';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
